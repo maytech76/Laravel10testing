@@ -1,0 +1,50 @@
+
+
+.btn {
+    @apply font-bold py-2 px-4 rounded disabled:bg-opacity-50;
+  }
+
+  .btn-azul {
+    @apply bg-blue-500 text-white hover:bg-blue-700;
+  }
+
+  .btn-amarillo {
+    @apply bg-yellow-500 text-yellow-950 hover:bg-yellow-700 hover:text-yellow-100  font-medium;
+  }
+
+  .btn-verde {
+    @apply bg-green-400 text-white hover:bg-green-700;
+  }
+
+  .btn-rojo {
+    @apply bg-red-500 text-white hover:bg-red-700;
+  }
+
+  .btn-rosa {
+    @apply bg-red-300 text-gray-800 hover:bg-red-500 hover:text-white
+  }
+
+  .btn-verde {
+    @apply bg-green-300 text-green-950 hover:bg-green-700 hover:text-green-100;
+  }
+
+  .btn-lime {
+    @apply bg-lime-500 text-white hover:bg-lime-700;
+  }
+
+  .btn-gris{
+    @apply bg-gray-600 text-white hover:bg-gray-400 hover:cursor-pointer disabled:cursor-none;
+  }
+
+  .btn-blanco-gris{
+    @apply bg-transparent text-gray-700 hover:bg-gray-600 hover:text-white;
+  }
+
+  .btn-gradient-gris{
+    @apply bg-gradient-to-r from-gray-400 to-gray-700 text-white font-bold py-2 px-4 rounded;
+  }
+
+  .btn-red-gradiente{
+    @apply bg-gradient-to-r from-red-500 to-red-800 text-white font-bold py-2 px-4 rounded;
+  }
+  
