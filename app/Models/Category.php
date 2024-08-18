@@ -14,7 +14,7 @@ class Category extends Model
 
     protected $fillable = [
 
-        'name',
+        'name', 'user_id'
     ];
 
     // Definimos la relacion entre Category y User asi podriamos relizar consultas a la tabla usuario

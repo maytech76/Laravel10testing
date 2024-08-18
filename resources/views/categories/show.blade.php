@@ -22,29 +22,41 @@
         <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
 
 
-            <form class="max-w-lg mx-auto">
-                <div class="mb-5">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">N° Registro</label>
-                    <input type="text" id="id" name="id" value="{{$category->id}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            <div>
+                <div class="mb-4 flex items-center gap-2">
+                    <span class="text-sm font-bold text-gray-900 dark:text-white">N° del Registro: </span>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$category->id}}</p>
                 </div>
-                <div class="mb-5">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                    <input type="text" id="name" name="name" value="{{$category->name}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <div class="mb-4 flex items-center gap-2">
+                    <span class="text-sm font-bold text-gray-900 dark:text-white">Nombre de la Categoría: </span>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$category->name}}</p>
                 </div>
-                <div class="mb-5">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Registro</label>
-                    <input type="text" id="name" name="name" value="{{$category->created_at}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <div class="mb-4 flex items-center gap-2">
+                    <span class="text-sm font-bold text-gray-900 dark:text-white">Fecha de Registro: </span>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$category->created_at}}</p>
                 </div>
 
-               
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar</button>
-            </form>
-
-
+                <hr>
+                <h2 class="py-1 text-blue-400">Detalles del Usuario</h2>
+                <hr>
+            
+                <div class="mt-4 mb-4 flex items-center gap-2">
+                    <span class="text-sm font-bold text-gray-900 dark:text-white">Usuario: </span>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">{{ $user->name }}</p>
+                </div>
+                <div class="mb-4 flex items-center gap-2">
+                    <span class="text-sm font-bold text-gray-900 dark:text-white">Email del Usuario: </span>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">{{ $user->email }}</p>
+                </div>
+                
+            
+                <div class="w-full">
+                    <a href="{{route('categories.index')}}" class="block w-full text-center bg-green-200 hover:bg-green-700 text-green-900 hover:text-white cursor-pointer p-2 rounded-lg">
+                        Cerrar
+                    </a>
+                </div>
+            </div>
+            
         </div>
      </div>
 
