@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            DashboardTableSeeder::class,
+            
+                CategorySeeder::class,
+                ProductSeeder::class,
+            
         ]);
     }
 }
