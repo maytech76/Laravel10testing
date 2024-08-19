@@ -17,6 +17,12 @@ class Category extends Model
         'name', 'user_id'
     ];
 
+    //Definimo la relacion entre Category and Product
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     // Definimos la relacion entre Category y User asi podriamos relizar consultas a la tabla usuario
     public function user()
     {

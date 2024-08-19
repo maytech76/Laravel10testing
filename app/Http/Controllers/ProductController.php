@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller
@@ -14,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        // Usamos el método 'with' para cargar la relación con la categoría y aplicamo la paginacion
+        $products = Product::with('category')->paginate(6);
+
         return view('products.index', compact('products'));
     }
 
@@ -22,8 +25,10 @@ class ProductController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+
     {
-        return view('products.create');
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('products.create', compact('categories')); //Pasamos el listado de categorias a la vista create
     }
 
     /**
@@ -31,15 +36,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        /* dd($request->all()); */
+
         //Validar datos del formulario
         $request->validate([
-            'name'=>'required',
-            'description' => 'required',
-            'category_id' => 'required',
+
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'category_id' => 'required|exists:categories,id',
+            'stock' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            
         ]);
 
+
+
         //si pasa la validacion creamos el registro
-        Product::create($request->all());
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->category_id = $request->input('category_id');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
+        $product->user_id = Auth::id(); // Guardar el ID del usuario autenticado
+        $product->save();
 
         //Redirecionamos a products.index
         return redirect()->route('products.index')->with('success', 'Producto creado');
@@ -50,15 +70,24 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+         // Obtenemos la información del usuario que creó la categoría
+         $user = $product->user;
+
+        return view('products.show', compact('product', 'user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
+
     {
-        return view('products.edit', compact('product'));
+         // Obtener todas las categorías para el select
+         $categories = Category::all();
+
+         /* dd($category->toArray()); */
+
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**

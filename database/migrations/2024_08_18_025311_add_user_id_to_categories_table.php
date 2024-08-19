@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            
-            /*Agregamos un nuevo campo user_id a la tabla categories*/
-
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            // Verifica si la columna ya existe antes de agregarla
+            if (!Schema::hasColumn('categories', 'user_id')) {
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            }
         });
     }
 
@@ -25,8 +25,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+            // Verifica si la columna existe antes de eliminarla
+            if (Schema::hasColumn('categories', 'user_id')) {
+                $table->dropForeign(['user_id']);
+                $table->dropColumn('user_id');
+            }
         });
     }
 };

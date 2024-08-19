@@ -1,5 +1,5 @@
 <x-authentication-layout>
-    <h1 class="text-3xl text-gray-800 dark:text-gray-100 font-bold mb-6">{{ __('Welcome back!') }}</h1>
+    <h1 class="text-3xl text-gray-800 dark:text-gray-100 font-bold mb-6">{{ __('Bienvenido de nuevo!') }}</h1>
     @if (session('status'))
         <div class="mb-4 font-medium text-sm text-green-600">
             {{ session('status') }}
@@ -22,12 +22,12 @@
             @if (Route::has('password.request'))
                 <div class="mr-1">
                     <a class="text-sm underline hover:no-underline" href="{{ route('password.request') }}">
-                        {{ __('Forgot Password?') }}
+                        {{ __('Olvidaste tus credenciales?') }}
                     </a>
                 </div>
             @endif            
             <x-button class="ml-3">
-                {{ __('Sign in') }}
+                {{ __('Acceder') }}
             </x-button>            
         </div>
     </form>
@@ -35,7 +35,7 @@
     <!-- Footer -->
     <div class="pt-5 mt-6 border-t border-gray-100 dark:border-gray-700/60">
         <div class="text-sm">
-            {{ __('Don\'t you have an account?') }} <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
+            {{ __('Si no cuentas con una cuenta, Ingresa y registrate') }} <a class="font-medium text-violet-500 hover:text-violet-600 dark:hover:text-violet-400" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
         </div>
         <!-- Warning -->
         <div class="mt-5">
@@ -44,7 +44,7 @@
                     <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
                 </svg>
                 <span class="text-sm">
-                    To support you during the pandemic super pro features are free until March 31st.
+                    Sistema Desarrolado para realizar testing a nuevas caracteristicas, funciones y paquetes de Laravel 10.
                 </span>
             </div>
         </div>

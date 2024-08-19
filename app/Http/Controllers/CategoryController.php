@@ -18,7 +18,6 @@ class CategoryController extends Controller
     {
         //Aplicamos la Paginacion por 8 items las cuales se reflejaran en la vista index
         $categories = Category::paginate(6);
-        /* $categories = Category::all(); */
         return view('categories.index', compact('categories'));
     }
 
