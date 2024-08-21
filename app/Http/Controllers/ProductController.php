@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -36,18 +37,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+            /*  dd($request->all()); */
 
-        //Validar datos del formulario
-        $request->validate([
+            //Validar datos del formulario
+            $request->validate([
 
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'category_id' => 'required|exists:categories,id',
-            'stock' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
+                'name' => 'required|string|max:255',
+                'description' => 'required|string|max:1000',
+                'category_id' => 'required|exists:categories,id',
+                'stock' => 'required|integer|min:0',
+                'price' => 'required|numeric|min:0',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+                
+                
+            ]);
+
+        
+
+            $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+
             
-        ]);
+        }
+
+
+    
 
 
 
@@ -59,6 +76,7 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->stock = $request->input('stock');
         $product->user_id = Auth::id(); // Guardar el ID del usuario autenticado
+        $product->image_path = $imagePath;
         $product->save();
 
         //Redirecionamos a products.index
@@ -100,9 +118,34 @@ class ProductController extends Controller
             'name'=>'required',
             'description' => 'required',
             'category_id' => 'required',
+            'stock' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $product->update($request->all());
+    
+
+       // Manejo de la imagen
+       if ($request->hasFile('image')) {
+            // Si hay una nueva imagen, la guardamos y eliminamos la imagen anterior si existe
+            if ($product->image_path) {
+                Storage::disk('public')->delete($product->image_path);
+        }
+
+        // Guardar la nueva imagen
+        $imagePath = $request->file('image')->store('products', 'public');
+        $product->image_path = $imagePath;
+    }
+
+        // Actualizar los demás campos
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->category_id = $request->input('category_id');
+        $product->stock = $request->input('stock');
+        $product->price = $request->input('price');
+
+        // Guardar los cambios
+        $product->save();
 
         //Redirecionamos a products.index
         return redirect()->route('products.index')->with('success', 'Producto Actualizado');

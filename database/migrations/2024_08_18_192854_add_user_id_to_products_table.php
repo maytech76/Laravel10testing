@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            // Verificamos si la columna 'user_id' no existe antes de agregarla
-            if (!Schema::hasColumn('products', 'user_id')) {
+         
+                // Si no existe, agrega la columna junto con la clave foránea
                 $table->foreignId('user_id')->constrained();
-            }
+            
         });
     }
 
@@ -25,8 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+           
+                $table->dropColumn('user_id');
+            
         });
     }
 };

@@ -35,53 +35,75 @@
         
         <div class="w-full max-w-1xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
 
-            <form action="{{route('products.update', $product->id)}} " method="POST" class="grid grid-cols-2 gap-4">
+            <form action="{{route('products.update', $product->id)}} " method="POST" class="grid grid-cols-2 gap-4" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="mb-5">
-                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                    <input type="name" name="name" value="{{$product->name}} "
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Ingresar Nombre del Producto" required />
+
+                <div class="w-full bg-cover rounded-md shadow-sm " style="aspect-ratio: 12/9;">
+
+                    <div x-data="{ imagePreview: '{{ $product->image_path ? asset('storage/' . $product->image_path) : '' }}' }">
+                        <!-- Vista previa de la imagen -->
+                        <div class="mt-2">
+                            <template x-if="imagePreview">
+                                <img :src="imagePreview" alt="Vista previa de la imagen" class="justify-center items-center w-full h-full object-cover rounded-md shadow-sm">
+                            </template>
+                        </div>
+
+                        <label for="image" class="block text-sm font-medium text-gray-700">Imagen del Producto</label>
+                        <input type="file" name="image" id="image" class="mt-1 block w-100" accept="image/*"
+                            @change="imagePreview = URL.createObjectURL($event.target.files[0])">
+                    </div>
                 </div>
-              
-                <div class="mb-5">
-                    <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
-                    <select name="category_id" id="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+
+            <div class="grid grid-cols-1 gap-2">
+                    <div class="mb-2">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                        <input type="name" name="name" value="{{$product->name}} "
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingresar Nombre del Producto" required />
+                    </div>
+                
+                    <div class="mb-2">
+                        <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
+                        <select name="category_id" id="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            
+                            <option value="disable">Selecione Categoria</option>
+                            @foreach ($categories as $item)
+
+                            {{-- comparamos el valor de item->id se igual al valor category_id del product de no serlo muestra una cadena vacia --}}
+                            <option value="{{ $item->id }}" {{ $product->category_id == $item->id ? 'selected' : '' }}>
+                                {{$item->name}}</option>
                         
-                        <option value="disable">Selecione Categoria</option>
-                        @foreach ($categories as $item)
+                            @endforeach
+                        
+                        </select>
+                    </div>
 
-                        {{-- comparamos el valor de item->id se igual al valor category_id del product de no serlo muestra una cadena vacia --}}
-                         <option value="{{ $item->id }}" {{ $product->category_id == $item->id ? 'selected' : '' }}>
-                            {{$item->name}}</option>
-                      
-                        @endforeach
-                       
-                      </select>
-                </div>
+                    <div class="mb-2 col-span-2">
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+                        <textarea name="description" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa la Descrión detallada del Producto">{{old('description', $product->description)}}</textarea>  
+                    </div>
 
-                <div class="mb-5 col-span-2">
-                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
-                    <textarea name="description" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa la Descrión detallada del Producto">{{old('description', $product->description)}}</textarea>  
-                </div>
+                    <div class="mb-5">
+                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+                        <input type="text" id="price" name="price" value="{{$product->price}}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            required />
+                    </div>
 
-                <div class="mb-5">
-                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
-                    <input type="number" id="price" name="price" value="{{$product->price}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required />
-                </div>
+                    <div class="mb-5">
+                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
+                        <input type="number" id="stock" name="stock" value="{{$product->stock}}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            required />
+                    </div>
+            </div>
 
-                <div class="mb-5">
-                    <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
-                    <input type="number" id="stock" name="stock" value="{{$product->stock}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required />
-                </div>
+
 
                   {{-- Botones --}}
-               <div class="items-center gap-6">
+               <div class="w-full items-center gap-6">
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Editar

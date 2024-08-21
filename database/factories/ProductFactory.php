@@ -22,6 +22,8 @@ class ProductFactory extends Factory
             'category_id' => $this->faker->numberBetween(1, 10), // Número aleatorio entre 1 y 10 para category_id
             'price' => $this->faker->randomFloat(2, 2000, 10000), // Precio aleatorio entre 2000 y 10000 con 2 decimales
             'stock' => $this->faker->numberBetween(1, 10), // Stock aleatorio entre 1 y 10
+            'image_path' => 'products/' . $this->faker->image('public/storage/products', 640, 480, null, false),
+            'user_id'=> 1
         ];
     }
 }

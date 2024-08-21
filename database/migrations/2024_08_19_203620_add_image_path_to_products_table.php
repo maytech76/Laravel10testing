@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             
-                $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            
+            $table->string('image_path')->nullable()->after('description');
         });
     }
 
@@ -23,11 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            // Verifica si la columna existe antes de eliminarla
-           
-                $table->dropColumn('user_id');
+        Schema::table('products', function (Blueprint $table) {
             
+            $table->dropColumn('image_path');
         });
     }
 };

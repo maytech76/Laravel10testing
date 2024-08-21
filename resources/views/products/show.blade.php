@@ -18,48 +18,56 @@
         </div>
 
       <div class="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-2 w-full max-w-9xl mx-auto">
-         {{-- Formulario de registro --}}
-        <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full max-w-6xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+                <div class="w-full bg-cover bg-center rounded-md shadow-sm py-4 px-8" style="aspect-ratio: 12/9;">
+                    <img class="justify-center items-center w-full h-full object-cover rounded-md shadow-sm" src="{{ asset('storage/' . $product->image_path)}}" />
+                </div>
+                
+                <div class="grid grid-cols-1">
 
-            <div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">N° del Registro: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->id}}</p>
-                </div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Nombre del Producto: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->name}}</p>
-                </div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Nombre de la Categoría: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->category->name}}</p>
-                </div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Existencia en Stock: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->stock}}</p>
-                </div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Precio Actual </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->price}}</p>
-                </div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Fecha de Registro: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->created_at}}</p>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">N° del Registro: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->id}}</p>
+                    </div>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Nombre del Producto: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->name}}</p>
+                    </div>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Nombre de la Categoría: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->category->name}}</p>
+                    </div>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Existencia en Stock: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->stock}}</p>
+                    </div>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Precio Actual </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->price}}</p>
+                    </div>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Fecha de Registro: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{$product->created_at}}</p>
+                    </div>
+    
+                    <hr>
+                    <h2 class="py-1 text-blue-400">Detalles del Usuario</h2>
+                    <hr>
+                
+                    <div class="mt-4 mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Usuario: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{ $user->name }}</p>
+                    </div>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-sm font-bold text-gray-900 dark:text-white">Email del Usuario: </span>
+                        <p class="text-sm text-gray-700 dark:text-gray-400">{{ $user->email }}</p>
+                    </div>
+
                 </div>
 
-                <hr>
-                <h2 class="py-1 text-blue-400">Detalles del Usuario</h2>
-                <hr>
-            
-                <div class="mt-4 mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Usuario: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{ $user->name }}</p>
-                </div>
-                <div class="mb-4 flex items-center gap-2">
-                    <span class="text-sm font-bold text-gray-900 dark:text-white">Email del Usuario: </span>
-                    <p class="text-sm text-gray-700 dark:text-gray-400">{{ $user->email }}</p>
-                </div>
+            </div>
                 
             
                 <div class="w-full">
@@ -67,10 +75,10 @@
                         Cerrar
                     </a>
                 </div>
-            </div>
+            
             
         </div>
-     </div>
+      </div>
 
     </div>
 

@@ -27,6 +27,7 @@
                 document.querySelector('html').style.colorScheme = 'dark';
             }
         </script>
+        <script src="//unpkg.com/alpinejs" defer></script>
     </head>
     <body
         class="font-inter antialiased bg-gray-200 dark:bg-gray-900 text-gray-600 dark:text-gray-400"
