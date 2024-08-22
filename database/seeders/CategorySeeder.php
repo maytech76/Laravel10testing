@@ -16,6 +16,7 @@ class CategorySeeder extends Seeder
     {
         {
             $categories = [
+                
                 'Electronicos',
                 'Pinturas',
                 'Cocina',
