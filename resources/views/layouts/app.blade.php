@@ -14,6 +14,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+       
 
         <!-- Styles -->
         @livewireStyles        
@@ -27,7 +29,6 @@
                 document.querySelector('html').style.colorScheme = 'dark';
             }
         </script>
-        <script src="//unpkg.com/alpinejs" defer></script>
     </head>
     <body
         class="font-inter antialiased bg-gray-200 dark:bg-gray-900 text-gray-600 dark:text-gray-400"
@@ -43,6 +44,9 @@
                 document.querySelector('body').classList.remove('sidebar-expanded');
             }
         </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
 
         <!-- Page wrapper -->
         <div class="flex h-[100dvh] overflow-hidden">
@@ -63,6 +67,7 @@
 
         </div>
 
-        @livewireScriptConfig
+         @livewireScriptConfig
+
     </body>
 </html>

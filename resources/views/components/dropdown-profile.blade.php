@@ -3,55 +3,62 @@
 ])
 
 <div class="relative inline-flex" x-data="{ open: false }">
-    <button
-        class="inline-flex justify-center items-center group"
-        aria-haspopup="true"
-        @click.prevent="open = !open"
-        :aria-expanded="open"                        
-    >
-        <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" width="32" height="32" alt="{{ Auth::user()->name }}" />
-        <div class="flex items-center truncate">
-            <span class="truncate ml-2 text-sm font-medium text-gray-600 dark:text-gray-100 group-hover:text-gray-800 dark:group-hover:text-white">{{ Auth::user()->name }}</span>
-            <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-500" viewBox="0 0 12 12">
-                <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-            </svg>
-        </div>
-    </button>
-    <div
-        class="origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1 {{$align === 'right' ? 'right-0' : 'left-0'}}"                
-        @click.outside="open = false"
-        @keydown.escape.window="open = false"
-        x-show="open"
-        x-transition:enter="transition ease-out duration-200 transform"
-        x-transition:enter-start="opacity-0 -translate-y-2"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-out duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        x-cloak                    
-    >
-        <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200 dark:border-gray-700/60">
-            <div class="font-medium text-gray-800 dark:text-gray-100">{{ Auth::user()->name }}</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 italic">Administrator</div>
-        </div>
-        <ul>
-            <li>
-                <a class="font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3" href="{{ route('profile.show') }}" @click="open = false" @focus="open = true" @focusout="open = false">Settings</a>
-            </li>
-            <li>
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
+   <div class="">
+    <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" width="32" height="32" alt="{{ Auth::user()->name }}" />
+   </div>
 
-                    <a class="font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3"
-                        href="{{ route('logout') }}"
-                        @click.prevent="$root.submit();"
-                        @focus="open = true"
-                        @focusout="open = false"
-                    >
-                        {{ __('Sign Out') }}
-                    </a>
-                </form>                                
-            </li>
-        </ul>                
+    <div class="flex items-center">
+        <div class="flex items-center ms-3">
+            <x-dropdown align="right" width="48">
+                <x-slot name="trigger">
+                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                        <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        </button>
+                    @else
+                        <span class="inline-flex rounded-md">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                {{ Auth::user()->name }}
+
+                                <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </span>
+                    @endif
+                </x-slot>
+
+                <x-slot name="content">
+                    <!-- Account Management -->
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                        {{ __('Manage Account') }}
+                    </div>
+
+                    <x-dropdown-link href="{{ route('profile.show') }}">
+                        {{ __('Profile') }}
+                    </x-dropdown-link>
+
+                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                        <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                            {{ __('API Tokens') }}
+                        </x-dropdown-link>
+                    @endif
+
+                <div class="border-t border-gray-200"></div>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+
+                        <x-dropdown-link href="{{ route('logout') }}"
+                                 @click.prevent="$root.submit();">
+                            {{ __('Log Out') }}
+                        </x-dropdown-link>
+                    </form>
+        
+                </x-slot>
+            </x-dropdown>
+        </div>
     </div>
+   
 </div>

@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         //Si existe al ejecuta de nuevo los seeders, se elimina esta carpeta
         Storage::deleteDirectory('products');
 
-
         //Se crea de nuevo la carpeta Products VACIA
         Storage::makeDirectory('products');
 

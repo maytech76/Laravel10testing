@@ -72,7 +72,8 @@
                             @foreach ($categories as $item)
 
                             {{-- comparamos el valor de item->id se igual al valor category_id del product de no serlo muestra una cadena vacia --}}
-                            <option value="{{ $item->id }}" {{ $product->category_id == $item->id ? 'selected' : '' }}>
+                            <option value="{{ $item->id }}" 
+                                {{ $product->category_id == $item->id ? 'selected' : '' }}>
                                 {{$item->name}}</option>
                         
                             @endforeach

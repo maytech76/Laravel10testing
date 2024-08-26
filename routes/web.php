@@ -12,6 +12,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CarController;
 
 
 
@@ -24,6 +25,9 @@ Route::resource('categories', CategoryController::class);
 
 /* Ruta para controlador productos */
 Route::resource('products', ProductController::class);
+
+/* Ruta para controlador Car to system */
+Route::resource('cars', CarController::class);
 
 
 

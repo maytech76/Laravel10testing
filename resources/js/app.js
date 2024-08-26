@@ -1,3 +1,12 @@
+import Alpine from 'alpinejs';
+
+import persist from '@alpinejs/persist';
+Alpine.plugin(persist);
+
+window.Alpine = Alpine;
+
+Alpine.start();
+
 import { Livewire } from '../../vendor/livewire/livewire/dist/livewire.esm';
  
 Livewire.start()
@@ -128,3 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
   dashboardCard09();
   dashboardCard11();
 });
+
+
+
