@@ -100,8 +100,7 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $car)
-    {
+    public function edit(Car $car){
         $cartypes = Cartype::all(); // Listado de cartypes
         $brands = Brand::all(); // Lista de Brands
         $modelcars = Model_car::all(); // Listado de Modelos
@@ -173,8 +172,9 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(Car $car){
+        $car->delete();
+
+        return redirect()->route('cars.index')->with('success', 'Registro Eliminado');
     }
 }

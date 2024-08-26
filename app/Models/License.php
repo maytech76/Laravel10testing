@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class License extends Model
 {
     use HasFactory;
+
+    protected $fillable =[
+
+        'name',
+    ];
+
+    public function driver(){
+        
+        return $this->hasMany(Driver::class);
+    }
 }
