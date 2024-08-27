@@ -26,15 +26,15 @@ class CarController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create(){
+
         $cartypes = Cartype::all(); // Solo obtener los nombres y ids
         $brands = Brand::all(); // Solo obtener los nombres y ids
         $modelcars = Model_car::all(); // Solo obtener los nombres y ids
 
        /*  dd($cartypes); */
 
-    return view('cars.create', compact('cartypes', 'brands', 'modelcars'));
+         return view('cars.create', compact('cartypes', 'brands', 'modelcars'));
     }
 
     /**
@@ -82,6 +82,15 @@ class CarController extends Controller
         $car->image_path = $imagePath;  
         $car->save();
 
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Exitoso..!!",
+            'icon' => "success",
+            'showConfirmButton'=> false,
+            'timer'=> 1700
+         ]);
+
          //Redirecionamos a products.index
          return redirect()->route('cars.index')->with('success', 'Vehiculo creado con Exito');
 
@@ -94,7 +103,7 @@ class CarController extends Controller
     public function show(Car $car) {
         return view('cars.show', compact('car'));
 
-        dd($car->toarray());
+        /* dd($car->toarray()); */
     }
 
     /**
@@ -165,6 +174,15 @@ class CarController extends Controller
         // Guardar los cambios
         $car->save();
 
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Actualizado..!!",
+            'icon' => "success",
+            'showConfirmButton'=> false,
+            'timer'=> 1800
+         ]);
+
         // Redirección a cars.index con un mensaje de éxito
         return redirect()->route('cars.index')->with('success', 'Vehículo actualizado con éxito');
    }
@@ -174,6 +192,15 @@ class CarController extends Controller
      */
     public function destroy(Car $car){
         $car->delete();
+
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Eliminado, Proceso Inrebersible..!!",
+            'icon' => "warning",
+            'showConfirmButton'=> false,
+            'timer'=> 2000
+         ]);
 
         return redirect()->route('cars.index')->with('success', 'Registro Eliminado');
     }

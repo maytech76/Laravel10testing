@@ -13,8 +13,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CarController;
-
-
+use App\Http\Controllers\DriverController;
 
 Route::redirect('/', 'login');
 
@@ -28,6 +27,9 @@ Route::resource('products', ProductController::class);
 
 /* Ruta para controlador Car to system */
 Route::resource('cars', CarController::class);
+
+/* Ruta para controlador Car to system */
+Route::resource('drivers', DriverController::class);
 
 
 

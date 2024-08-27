@@ -48,6 +48,17 @@ class CategoryController extends Controller
         $category->user_id = Auth::id(); // Guardar el ID del usuario autenticado
         $category->save();
 
+
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Exitoso..!!",
+            'icon' => "success",
+            'showConfirmButton'=> false,
+            'timer'=> 1700
+         ]);
+
+
         //Redirecionamos a products.index
         return redirect()->route('categories.index')->with('success', 'Categoria Creada');
     }
@@ -87,6 +98,16 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->save();
 
+
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Actualizado",
+            'icon' => "success",
+            'showConfirmButton'=> false,
+            'timer'=> 1700
+         ]);
+
         //Redirecionamos a products.index
         return redirect()->route('categories.index')->with('success', 'Producto Actualizado');
     }
@@ -97,6 +118,15 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
+        session()->flash('swal', [
+            
+            'title' => "Registro",
+            'text'=> "Eliminado, Proceso Inrebersible..!!",
+            'icon' => "warning",
+            'showConfirmButton'=> false,
+            'timer'=> 2000
+         ]);
 
         //Redirecionamos a categories.index
         return redirect()->route('categories.index')->with('success', 'Categoria Eliminada');

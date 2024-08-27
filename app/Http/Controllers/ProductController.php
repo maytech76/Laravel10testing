@@ -72,6 +72,15 @@ class ProductController extends Controller
         $product->image_path = $imagePath;
         $product->save();
 
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Exitoso..!!",
+            'icon' => "success",
+            'showConfirmButton'=> false,
+            'timer'=> 1700
+         ]);
+
         //Redirecionamos a products.index
         return redirect()->route('products.index')->with('success', 'Producto creado');
     }
@@ -136,6 +145,16 @@ class ProductController extends Controller
         // Guardar los cambios
         $product->save();
 
+
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Actualizado..!!",
+            'icon' => "success",
+            'showConfirmButton'=> false,
+            'timer'=> 1700
+         ]);
+
         //Redirecionamos a products.index
         return redirect()->route('products.index')->with('success', 'Producto Actualizado');
     }
@@ -146,6 +165,16 @@ class ProductController extends Controller
     public function destroy(Product $product){
         //Eliminamos un registro especifico
         $product->delete();
+
+
+        session()->flash('swal', [
+            
+            'title' => "Buen Trabajo",
+            'text'=> "Registro Eliminado, Proceso Inrebersible..!!",
+            'icon' => "warning",
+            'showConfirmButton'=> false,
+            'timer'=> 2000
+         ]);
 
         //Redirecionamos a products.index
         return redirect()->route('products.index')->with('success', 'Producto Eliminado');
