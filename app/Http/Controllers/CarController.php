@@ -16,8 +16,7 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index(){
         $cars = Car::with('cartype', 'brand', 'model_car')->paginate(6);
 
         return view('cars.index', compact('cars'));
