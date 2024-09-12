@@ -25,8 +25,8 @@
                    {{--  grid grid-cols-1 md:grid-cols-4 gap-4 --}}
 
     
-                    <div class="w-[300px] bg-cover bg-center rounded-full shadow-sm py-4 px-2 mb-4" style="aspect-ratio: 12/9;">
-                        <img class="justify-center items-center w-[400px] h-[260px] object-cover rounded-full shadow-sm" src="{{ asset('storage/' . $driver->image_path)}}" />
+                    <div class="mx-auto w-[300px] bg-cover bg-center rounded-full shadow-md py-4 px-2 mb-4" style="aspect-ratio: 9/9;">
+                        <img class="justify-center items-center w-[400px] sm:w-[150px] h-[260px] sm:h-[150px] object-cover rounded-full shadow-sm" src="{{ asset('storage/' . $driver->image_path)}}" />
                     </div>
                     
                     <div class="ml-4 grid grid-cols-1 md:grid-cols-4 mb-8">

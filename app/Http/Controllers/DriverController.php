@@ -15,6 +15,7 @@ class DriverController extends Controller
 {
    
     public function index(){
+        
         $drivers = Driver::with('user', 'license')->paginate(6);
 
         return view('drivers.index', compact('drivers'));
@@ -112,6 +113,7 @@ class DriverController extends Controller
 
    
     public function update(Request $request, Driver $driver){
+       
         $request->validate([
 
             'license_id'=> 'required',
@@ -165,7 +167,7 @@ class DriverController extends Controller
        $driver->pathology = $request->input('pathology');
        $driver->status = $request->input('status');
 
-    /*    dd($driver->toArray()); */
+  
       
        $driver->save();
 

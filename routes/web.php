@@ -4,15 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DriverController;
 
 Route::redirect('/', 'login');
@@ -30,6 +25,12 @@ Route::resource('cars', CarController::class);
 
 /* Ruta para controlador Car to system */
 Route::resource('drivers', DriverController::class);
+
+/* Ruta para controlador Datos to system */
+Route::resource('companies', CompanyController::class);
+
+/* Ruta para controlador Datos to system */
+Route::resource('customers', CustomerController::class);
 
 
 

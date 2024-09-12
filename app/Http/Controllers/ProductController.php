@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index() {
         // Usamos el método 'with' para cargar la relación con la categoría y aplicamo la paginacion
         $products = Product::with('category')->paginate(6);
@@ -21,17 +19,13 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create(){
         $categories = Category::all(); // Obtener todas las categorías
         return view('products.create', compact('categories')); //Pasamos el listado de categorias a la vista create
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request){
             /*  dd($request->all()); */
 
@@ -85,9 +79,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto creado');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(Product $product){
          // Obtenemos la información del usuario que creó el producto
          $user = $product->user;
@@ -95,9 +87,9 @@ class ProductController extends Controller
         return view('products.show', compact('product', 'user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
+
+
     public function edit(Product $product){
          // Obtener todas las categorías para el select
          $categories = Category::all();
@@ -107,9 +99,7 @@ class ProductController extends Controller
         return view('products.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, Product $product){
         //Validar datos del formulario
         $request->validate([
@@ -159,9 +149,8 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
+
     public function destroy(Product $product){
         //Eliminamos un registro especifico
         $product->delete();
